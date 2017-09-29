@@ -1,0 +1,20 @@
+# Managed by Ansible
+
+{% if datadog_config["dd_url"] is not defined -%}
+dd_url: {{ datadog_url | default('https://app.datadoghq.com') }}
+{% endif %}
+
+{% if datadog_config["api_key"] is not defined -%}
+api_key: {{ datadog_api_key | default('youshouldsetthis') }}
+{% endif %}
+
+{% if datadog_config["datadog_agent6_use_v2_api"] is not defined -%}
+use_v2_api: {{ datadog_agent6_use_v2_api }}
+{% endif %}
+
+{# These variables are free-style, passed through a hash -#}
+{% if datadog_config -%}
+{% for key, value in datadog_config.items() -%}
+{{ key }}: {{ value }}
+{% endfor -%}
+{% endif %}

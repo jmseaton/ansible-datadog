@@ -1,0 +1,10 @@
+# Managed by Ansible
+
+{% if datadog_config_ex is defined -%}
+{% for section, keyvals in datadog_config_ex.items() %}
+[{{ section }}]
+{% for key, value in keyvals.items() -%}
+{{ key }}: {{ value }}
+{% endfor -%}
+{% endfor %}
+{% endif %}
